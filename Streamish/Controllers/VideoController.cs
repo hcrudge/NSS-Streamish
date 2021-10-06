@@ -40,6 +40,17 @@ namespace Streamish.Controllers
             return Ok(video);
         }
 
+        [HttpGet("GetByIdWithComments/{id}")]
+        public IActionResult GetByIdWithComments(int id)
+        {
+            var video = _videoRepository.GetById(id);
+            if (video == null)
+            {
+                return NotFound();
+            }
+            return Ok(video);
+        }
+
         [HttpPost]
         public IActionResult Post(Video video)
         {
@@ -65,6 +76,19 @@ namespace Streamish.Controllers
             _videoRepository.Delete(id);
             return NoContent();
         }
+
+        [HttpGet("search")]
+        public IActionResult Search(string q, bool sortDesc)
+        {
+            return Ok(_videoRepository.Search(q, sortDesc));
+        }
+
+        [HttpGet("hottest")]
+        public IActionResult SearchByDate(DateTime since)
+        {
+            return Ok(_videoRepository.SearchByDate(since));
+        }
+
     }
 }
 

@@ -28,7 +28,11 @@ namespace Streamish
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IVideoRepository, VideoRepository>();
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddControllers();
+            //JSON Serializer - to keep fields from returning the null fields/objects.
+            //services.AddMvc()
+            //      .AddJsonOptions
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Streamish", Version = "v1" });
