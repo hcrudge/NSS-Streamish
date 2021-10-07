@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, CardText } from "reactstrap";
 
 const Video = ({ video }) => {
   return (
@@ -17,6 +17,15 @@ const Video = ({ video }) => {
           <strong>{video.title}</strong>
         </p>
         <p>{video.description}</p>
+       
+           <strong>Comments:</strong>
+
+           {video.comments?.length !== 0 ?(
+            video.comments?.map((c) => <p>{c.message}</p>)):
+            (<div> No Comments</div>)}
+         
+           
+     
       </CardBody>
     </Card>
   );
