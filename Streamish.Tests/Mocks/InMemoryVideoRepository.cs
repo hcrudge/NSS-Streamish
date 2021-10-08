@@ -71,9 +71,9 @@ namespace Streamish.Tests.Mocks
             currentVideo.UserProfileId = video.UserProfileId;
         }
 
-        public List<Video> Search(string criterion, bool sortDescending)
+        public List<Video> Search(string q, bool sortDesc)
         {
-            throw new NotImplementedException();
+            return _data;
         }
         public List<Video> SearchByDate(DateTime since)
         {

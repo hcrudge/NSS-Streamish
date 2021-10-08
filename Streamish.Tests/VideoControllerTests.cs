@@ -179,6 +179,33 @@ namespace Streamish.Tests
             Assert.Null(videoFromDb);
         }
 
+        [Fact]
+        public void Search_Returns_Matching_Videos()
+        {
+            // Arrange - a.k.a. Test Bed
+            var testVideoTitle = "JavaScript";
+            var videos = CreateTestVideos(7);
+            videos[0].Title = testVideoTitle; //Make sure we know the title of one of the videos
+           
+
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
+            var q = "Java";
+            var sortDesc = true;
+
+            // Act 
+            var result = controller.Search(q,sortDesc);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var actualVideos = Assert.IsType<List<Video>>(okResult.Value);
+
+            var videoFromDb = repo.InternalData.FirstOrDefault(p => p.Title == testVideoTitle);
+            Assert.NotNull(videoFromDb);
+        }
+
+
+
         private List<Video> CreateTestVideos(int count)
         {
             var videos = new List<Video>();
