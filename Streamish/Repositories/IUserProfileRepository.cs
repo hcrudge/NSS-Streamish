@@ -6,6 +6,7 @@ namespace Streamish.Repositories
     public interface IUserProfileRepository
     {
         void Add(UserProfile userProfile);
+        UserProfile GetByFirebaseUserId(string firebaseUserId);
         void Delete(int id);
         List<UserProfile> GetAll();
         UserProfile GetById(int id);
